@@ -1,6 +1,9 @@
 <?php
 
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\AuthorController;
+use App\Http\Controllers\BookController;
+use App\Http\Controllers\GenreController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -29,5 +32,8 @@ Route::middleware([
 
     Route::middleware(['auth','admin'])->name('admin.')->prefix('admin')->group(function () {
         Route::get('/', [AdminController::class, 'index'])->name('index');
+        Route::resource('/books', BookController::class);
+        Route::resource('/authors', AuthorController::class);
+        Route::resource('/genres', GenreController::class);
     });
 });
