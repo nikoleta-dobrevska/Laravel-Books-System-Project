@@ -15,10 +15,10 @@ return new class extends Migration
     {
         Schema::create('books_genres', function (Blueprint $table) {
             $table->id();
-            $table->integer('genre_id')->unsigned();
-            $table->foreign('genre_id')->references('id')->on('genres')->onDelete('cascade');
-            $table->integer('book_id')->unsigned();
-            $table->foreign('book_id')->references('id')->on('books')->onDelete('cascade');
+            $table->integer('genre_id')->nullable()->unsigned();
+            $table->foreign('genre_id')->references('id')->on('genres');
+            $table->integer('book_id')->nullable()->unsigned();
+            $table->foreign('book_id')->references('id')->on('books');
             $table->timestamps();
         });
     }

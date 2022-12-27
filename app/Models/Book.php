@@ -18,12 +18,12 @@ class Book extends Model
 
     public function genre(): BelongsToMany
     {
-        return $this->belongsToMany(Genre::class);
+        return $this->belongsToMany(Genre::class, 'books_genres');
     }
 
     public function image(): HasOne
     {
-        return $this->hasOne(Image::class);
+        return $this->hasOne(Image::class,'id');
     }
 
 }
