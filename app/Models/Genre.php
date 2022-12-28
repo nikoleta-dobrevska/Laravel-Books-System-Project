@@ -12,7 +12,7 @@ class Genre extends Model
 
     protected $fillable = ['name'];
 
-    public function book(): BelongsToMany
+    public function books(): BelongsToMany
     {
         return $this->belongsToMany(Book::class, 'books_genres');
     }

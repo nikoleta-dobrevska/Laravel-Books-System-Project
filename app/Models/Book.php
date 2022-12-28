@@ -16,14 +16,9 @@ class Book extends Model
         return $this->belongsToMany(Author::class, 'authors_books');
     }
 
-    public function genre(): BelongsToMany
+    public function genres(): BelongsToMany
     {
         return $this->belongsToMany(Genre::class, 'books_genres');
-    }
-
-    public function image(): HasOne
-    {
-        return $this->hasOne(Image::class,'id');
     }
 
 }

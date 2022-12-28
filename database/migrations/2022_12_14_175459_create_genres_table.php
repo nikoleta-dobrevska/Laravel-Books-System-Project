@@ -16,8 +16,8 @@ return new class extends Migration
         Schema::create('genres', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
-            $table->string('name')->unique('name');
-            $table->foreignId('book_id')->nullable()->constrained()->references('id')->on('books');
+            $table->string('name',255);
+            $table->foreignId('book_id')->nullable()->constrained()->references('id')->on('books')->onDelete('cascade');
         });
     }
 

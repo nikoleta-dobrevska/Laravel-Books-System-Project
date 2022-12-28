@@ -22,6 +22,12 @@ class GenreController extends Controller
         // ...
     }
 
+    public function show($id)
+    {
+        //
+    }
+
+
     public function create()
     {
         return view('admin.genres.create');
@@ -34,11 +40,6 @@ class GenreController extends Controller
         ]);
 
         return to_route('admin.genres.index');
-    }
-
-    public function show($id)
-    {
-        //
     }
 
     public function edit(Genre $genre)

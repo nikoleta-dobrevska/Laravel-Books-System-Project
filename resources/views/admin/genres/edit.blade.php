@@ -8,7 +8,7 @@
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="flex justify-end m-2 p-2">
-                <a href="{{ route('admin.books.index') }}">Go back</a>
+                <a href="{{ route('admin.genres.index') }}">Go back</a>
             </div>
         </div>
         <div class="space-y-8 divide-y divide-gray-200 w-1/2 mt-10">

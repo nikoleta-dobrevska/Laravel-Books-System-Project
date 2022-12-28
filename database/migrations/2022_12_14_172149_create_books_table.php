@@ -16,18 +16,15 @@ return new class extends Migration
         Schema::create('books', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
-            $table->string('title',255);
-            $table->string('isbn',100)->unique('isbn');
+            $table->string('title');
+            $table->string('isbn');
             $table->integer('pages');
             $table->longText('summary');
-            $table->integer('user_id')->unsigned();
-            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
-            $table->integer('author_id')->unsigned();
-            $table->foreign('author_id')->references('id')->on('authors')->onDelete('cascade');
-            $table->integer('genre_id')->unsigned();
-            $table->foreign('genre_id')->references('id')->on('genres')->onDelete('cascade');
-            $table->integer('image_id')->unsigned();
-            $table->foreign('image_id')->references('id')->on('images')->onDelete('cascade');
+            $table->string('image');
+            $table->foreignId('user_id')->nullable()->constrained()->references('id')->on('users')->onDelete('cascade');
+            $table->foreignId('author_id')->nullable()->constrained()->references('id')->on('authors')->onDelete('cascade');
+            $table->foreignId('genre_id')->nullable()->constrained()->references('id')->on('genres')->onDelete('cascade');
+            $table->foreignId('image_id')->nullable()->constrained()->references('id')->on('images')->onDelete('cascade');
         });
     }
 

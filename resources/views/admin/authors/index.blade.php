@@ -7,32 +7,31 @@
 
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <table class="table-auto">
-                <thead>
-                <tr>
-                    <th>Song</th>
-                    <th>Artist</th>
-                    <th>Year</th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr>
-                    <td>The Sliding Mr. Bones (Next Stop, Pottersville)</td>
-                    <td>Malcolm Lockyer</td>
-                    <td>1961</td>
-                </tr>
-                <tr>
-                    <td>Witchy Woman</td>
-                    <td>The Eagles</td>
-                    <td>1972</td>
-                </tr>
-                <tr>
-                    <td>Shining Star</td>
-                    <td>Earth, Wind, and Fire</td>
-                    <td>1975</td>
-                </tr>
-                </tbody>
-            </table>
+            <div class="flex justify-end m-2 p-2">
+                <a href="{{ route('admin.authors.create') }}">Add new author</a>
+            </div>
+            @foreach($authors as $author)
+                <th>
+                    <tb>
+                        <tr>
+                            <td>
+                                {{ $author->first_name }}
+                                {{ $author->last_name }}
+                            <td>
+                                <img src="{{ Storage::url($author->image) }}">
+                            </td>
+                            <td>
+                                <a href="{{ route('admin.authors.edit', $author->id) }}">Edit</a>
+                                <form method="POST" action="{{ route('admin.authors.destroy', $author->id) }}" onsubmit="return confirm('Are you sure you want to delete the author?');">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit">Delete</button>
+                                </form>
+                            </td>
+                        </tr>
+                    </tb>
+                </th>
+            @endforeach
         </div>
     </div>
 </x-admin-layout>

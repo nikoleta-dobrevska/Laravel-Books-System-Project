@@ -16,11 +16,10 @@ return new class extends Migration
         Schema::create('authors', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
-            $table->string('first_and_last_name',255)->unique('first_and_last_name');
-            $table->integer('book_id')->unsigned();
-            $table->foreign('book_id')->references('id')->on('books')->onDelete('cascade');
-            $table->integer('image_id')->unsigned();
-            $table->foreign('image_id')->references('id')->on('images')->onDelete('cascade');
+            $table->string('first_name');
+            $table->string('last_name');
+            $table->string('image');
+            $table->foreignId('book_id')->nullable()->constrained()->references('id')->on('books')->onDelete('cascade');
         });
     }
 
