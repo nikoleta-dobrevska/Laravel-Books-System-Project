@@ -15,10 +15,9 @@
                     <tb>
                         <tr>
                             <td>
-                                {{ $author->first_name }}
-                                {{ $author->last_name }}
+                                {{ $author->name }}
                             <td>
-                                <img src="{{ Storage::url($author->image) }}">
+                                <img src="{{ Storage::url($author->image) }}"/>
                             </td>
                             <td>
                                 <a href="{{ route('admin.authors.edit', $author->id) }}">Edit</a>

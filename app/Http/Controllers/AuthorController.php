@@ -38,8 +38,7 @@ class AuthorController extends Controller
         $image = $request->file('image')->store('public/authors');
 
         Author::create([
-            'first_name' => $request->first_name,
-            'last_name' => $request->last_name,
+            'name' => $request->name,
             'image' => $image
         ]);
 
@@ -54,8 +53,7 @@ class AuthorController extends Controller
     public function update(Request $request, Author $author)
     {
         $request->validate([
-            'first_name' => 'required',
-            'last_name' => 'required',
+            'name' => 'required'
         ]);
 
         $image = $author->image;
@@ -67,8 +65,7 @@ class AuthorController extends Controller
         }
 
         $author->update([
-            'first_name' => $request->first_name,
-            'last_name' => $request->last_name,
+            'name' => $request->name,
             'image' => $image
         ]);
 

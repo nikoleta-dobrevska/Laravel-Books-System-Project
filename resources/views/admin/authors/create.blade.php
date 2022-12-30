@@ -15,13 +15,9 @@
             <form method="POST" action="{{ route('admin.authors.store') }}" enctype="multipart/form-data">
                 @csrf
                 <div class="sm:col-span-6">
-                    <label for="title" class="block text-sm font-medium text-gray-700"> First name </label>
+                    <label for="title" class="block text-sm font-medium text-gray-700">  Name </label>
                     <div class="mt-1">
-                        <input type="text" id="first_name" name="first_name" class="block w-full transition duration-150 ease-in-out appearance-none bg-white border border-gray-400 rounded-md py-2 px-3 text-base leading-normal transition duration-150 ease-in-out sm:text-sm sm:leading-5" />
-                    </div>
-                    <label for="title" class="block text-sm font-medium text-gray-700"> Last name </label>
-                    <div class="mt-1">
-                        <input type="text" id="last_name" name="last_name" class="block w-full transition duration-150 ease-in-out appearance-none bg-white border border-gray-400 rounded-md py-2 px-3 text-base leading-normal transition duration-150 ease-in-out sm:text-sm sm:leading-5" />
+                        <input type="text" id="name" name="name" class="block w-full transition duration-150 ease-in-out appearance-none bg-white border border-gray-400 rounded-md py-2 px-3 text-base leading-normal transition duration-150 ease-in-out sm:text-sm sm:leading-5" />
                     </div>
                     <label for="title" class="block text-sm font-medium text-gray-700"> Image of author </label>
                     <div class="mt-1">

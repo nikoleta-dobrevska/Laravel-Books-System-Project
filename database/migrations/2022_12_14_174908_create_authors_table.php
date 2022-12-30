@@ -16,8 +16,7 @@ return new class extends Migration
         Schema::create('authors', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
-            $table->string('first_name');
-            $table->string('last_name');
+            $table->string('name');
             $table->string('image');
             $table->foreignId('book_id')->nullable()->constrained()->references('id')->on('books')->onDelete('cascade');
         });

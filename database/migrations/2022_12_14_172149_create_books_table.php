@@ -21,10 +21,8 @@ return new class extends Migration
             $table->integer('pages');
             $table->longText('summary');
             $table->string('image');
-            $table->foreignId('user_id')->nullable()->constrained()->references('id')->on('users')->onDelete('cascade');
-            $table->foreignId('author_id')->nullable()->constrained()->references('id')->on('authors')->onDelete('cascade');
             $table->foreignId('genre_id')->nullable()->constrained()->references('id')->on('genres')->onDelete('cascade');
-            $table->foreignId('image_id')->nullable()->constrained()->references('id')->on('images')->onDelete('cascade');
+            $table->foreignId('author_id')->nullable()->constrained()->references('id')->on('authors')->onDelete('cascade');
         });
     }
 
