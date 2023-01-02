@@ -24,8 +24,8 @@ class AuthorStoreRequest extends FormRequest
     public function rules()
     {
         return [
-            'name'=>['required'],
-            'image' => ['required']
+            'name'=>['required','max:255','unique:authors'],
+            'image' => ['required','mimes:jpeg,png,jpg','size:1024']
         ];
     }
 }

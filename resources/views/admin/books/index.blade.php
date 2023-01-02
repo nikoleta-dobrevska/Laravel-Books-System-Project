@@ -19,6 +19,12 @@
                             {{ $book->isbn }}
                             {{ $book->pages}}
                             {{ $book->summary }}
+                            @foreach($book->genres as $genre)
+                                <td>{{ $genre->name }}</td>
+                            @endforeach
+                            @foreach($book->authors as $author)
+                                <td>{{ $author->name }}</td>
+                            @endforeach
                             <td>
                                 <img src="{{ Storage::url($book->image) }}"/>
                             </td>

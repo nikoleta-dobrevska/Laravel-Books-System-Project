@@ -42,7 +42,7 @@ class AuthorController extends Controller
             'image' => $image
         ]);
 
-        return to_route('admin.authors.index');
+        return to_route('admin.authors.index')->with('success','The author has been added successfully!');
     }
 
     public function edit(Author $author)
@@ -69,7 +69,7 @@ class AuthorController extends Controller
             'image' => $image
         ]);
 
-        return to_route('admin.authors.index');
+        return to_route('admin.authors.index')->with('success','The author has been updated successfully!');
     }
 
     public function destroy(Author $author)
@@ -77,6 +77,6 @@ class AuthorController extends Controller
         Storage::delete($author->image);
         $author->delete();
 
-        return to_route('admin.authors.index');
+        return to_route('admin.authors.index')->with('success','The author has been deleted successfully!');
     }
 }

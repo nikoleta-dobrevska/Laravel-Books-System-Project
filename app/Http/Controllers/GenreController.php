@@ -39,7 +39,7 @@ class GenreController extends Controller
             'name' => $request->name
         ]);
 
-        return to_route('admin.genres.index');
+        return to_route('admin.genres.index')->with('success','The genre has been added successfully!');
     }
 
     public function edit(Genre $genre)
@@ -57,13 +57,13 @@ class GenreController extends Controller
             'name' => $request->name
         ]);
 
-        return to_route('admin.genres.index');
+        return to_route('admin.genres.index')->with('success','The genre has been updated successfully!');
     }
 
     public function destroy(Genre $genre)
     {
         $genre->delete();
 
-        return to_route('admin.genres.index');
+        return to_route('admin.genres.index')->with('success','The genre has been deleted successfully!');
     }
 }

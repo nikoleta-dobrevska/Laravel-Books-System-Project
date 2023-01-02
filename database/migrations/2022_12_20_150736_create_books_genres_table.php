@@ -17,7 +17,6 @@ return new class extends Migration
             $table->id();
             $table->foreignId('genre_id')->constrained()->references('id')->on('genres')->onDelete('cascade');
             $table->foreignId('book_id')->constrained()->references('id')->on('books')->onDelete('cascade');
-            $table->timestamps();
         });
     }
 

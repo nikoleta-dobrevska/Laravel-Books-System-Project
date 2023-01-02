@@ -24,9 +24,9 @@ class BookStoreRequest extends FormRequest
     public function rules()
     {
         return [
-            'title' => ['required'],
-            'isbn' => ['required'],
-            'pages' => ['required'],
+            'title' => ['required','max:255','unique:books'],
+            'isbn' => ['required','max:255'],
+            'pages' => ['required','min:1','max:10000'],
             'image' => ['required'],
             'summary' => ['required'],
             'genre_id' => ['required'],

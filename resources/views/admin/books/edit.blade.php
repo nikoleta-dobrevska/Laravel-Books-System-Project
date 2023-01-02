@@ -33,8 +33,8 @@
                     </div>
                     <div>
                         <label for="title" class="block text-sm font-medium text-gray-700"> Genre </label>
-                        <select multiple>
-                            @foreach($genres as $genre)
+                        <select id="genre_id" name="genre_id" multiple="multiple">
+                            @foreach($genre_id as $genre)
                                 <option
                                     value="{{$genre->id}}" @selected($book->genres->contains($genre))>{{$genre->name}}</option>
                             @endforeach
@@ -42,8 +42,8 @@
                     </div>
                     <div>
                         <label for="title" class="block text-sm font-medium text-gray-700"> Author </label>
-                        <select multiple>
-                            @foreach($authors as $author)
+                        <select id="author_id" name="author_id" multiple="multiple">
+                            @foreach($author_id as $author)
                                 <option
                                     value="{{$author->id}}" @selected($book->authors->contains($author))>{{$author->name}}</option>
                             @endforeach
@@ -57,7 +57,7 @@
                     </div>
                     <div>
                         <label for="title" class="block text-sm font-medium text-gray-700"> Summary </label>
-                        <textarea name="summary" rows="4" value="{{$book->summary}}"></textarea>
+                        <textarea name="summary" rows="4" value="{{ $book->summary }}"></textarea>
                     </div>
                 </div>
                 <button type="submit">Update</button>

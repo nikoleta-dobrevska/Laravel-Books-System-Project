@@ -55,14 +55,14 @@ class BookController extends Controller
             $book->authors()->attach($request->author_id);
         }
 
-        return to_route('admin.books.index')->with('success', 'Book added successfully.');
+        return to_route('admin.books.index')->with('success', 'The book has been added successfully.');
     }
 
     public function edit(Book $book)
     {
-        $genres = Genre::all();
-        $authors = Author::all();
-        return view('admin.books.edit', compact('book', 'genres', 'authors'));
+        $genre_id = Genre::all();
+        $author_id = Author::all();
+        return view('admin.books.edit', compact('book', 'genre_id', 'author_id'));
     }
 
     public function update(Request $request, Book $book)
@@ -71,7 +71,9 @@ class BookController extends Controller
             'title' => 'required',
             'isbn' => 'required',
             'pages' => 'required',
-            'summary' => 'required'
+            'summary' => 'required',
+            'genre_id' => 'required',
+            'author_id' => 'required'
         ]);
 
         $image = $book->image;
@@ -86,18 +88,20 @@ class BookController extends Controller
             'isbn' => $request->isbn,
             'pages' => $request->pages,
             'image' => $image,
-            'summary' => $request->summary
+            'summary' => $request->summary,
+            'genre_id' => $request->genre_id,
+            'author_id' => $request->author_id
         ]);
 
-        if ($request->has('genres')) {
-            $book->genres()->sync($request->genres);
+        if ($request->has('genre_id')) {
+            $book->genres()->sync($request->genre_id);
         }
 
-        if ($request->has('authors')) {
-            $book->authors()->sync($request->authors);
+        if ($request->has('author_id')) {
+            $book->authors()->sync($request->author_id);
         }
 
-        return to_route('admin.books.index');
+        return to_route('admin.books.index')->with('success', 'The book has been updated successfully.');
     }
 
     public function destroy(Book $book)
@@ -107,7 +111,7 @@ class BookController extends Controller
         $book->authors()->detach();
         $book->delete();
 
-        return to_route('admin.books.index');
+        return to_route('admin.books.index')->with('success', 'The book has been deleted successfully.');
     }
 }
 
