@@ -53,7 +53,8 @@ class AuthorController extends Controller
     public function update(Request $request, Author $author)
     {
         $request->validate([
-            'name' => 'required'
+            'name' => 'required|regex:/^([^0-9]*)$/|max:255',
+            'image'=>'mimes:jpeg,png,jpg|max:1024'
         ]);
 
         $image = $author->image;

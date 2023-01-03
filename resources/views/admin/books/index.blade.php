@@ -18,6 +18,7 @@
                             {{ $book->title }}
                             {{ $book->isbn }}
                             {{ $book->pages}}
+                            {{ $book->publishing_date->format('d-m-Y')}}
                             {{ $book->summary }}
                             @foreach($book->genres as $genre)
                                 <td>{{ $genre->name }}</td>

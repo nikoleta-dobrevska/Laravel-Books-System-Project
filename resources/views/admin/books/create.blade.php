@@ -24,7 +24,7 @@
                     @error('title')
                     <div class="text-sm text-red-400">{{ $message }}</div>
                     @enderror
-                    <label for="title" class="block text-sm font-medium text-gray-700"> ISBN </label>
+                    <label for="isbn" class="block text-sm font-medium text-gray-700"> ISBN </label>
                     <div class="mt-1">
                         <input type="text" id="isbn" name="isbn"
                                class="block w-full transition duration-150 ease-in-out appearance-none bg-white border border-gray-400 rounded-md py-2 px-3 text-base leading-normal transition duration-150 ease-in-out sm:text-sm sm:leading-5 @error('isbn') border-red-400 @enderror"/>
@@ -32,7 +32,7 @@
                     @error('isbn')
                     <div class="text-sm text-red-400">{{ $message }}</div>
                     @enderror
-                    <label for="title" class="block text-sm font-medium text-gray-700"> Pages </label>
+                    <label for="pages" class="block text-sm font-medium text-gray-700"> Pages </label>
                     <div class="mt-1">
                         <input type="number" id="pages" name="pages" min="0" max="10000"
                                class="block w-full transition duration-150 ease-in-out appearance-none bg-white border border-gray-400 rounded-md py-2 px-3 text-base leading-normal transition duration-150 ease-in-out sm:text-sm sm:leading-5 @error('pages') border-red-400 @enderror"/>
@@ -40,9 +40,18 @@
                     @error('pages')
                     <div class="text-sm text-red-400">{{ $message }}</div>
                     @enderror
+                    <label for="publishing_date" class="block text-sm font-medium text-gray-700"> Publishing Date
+                    </label>
+                    <div class="mt-1">
+                        <input type="date" id="publishing_date" name="publishing_date"
+                               class="block w-full appearance-none bg-white border border-gray-400 rounded-md py-2 px-3 text-base leading-normal transition duration-150 ease-in-out sm:text-sm sm:leading-5 @error('publishing_date') border-red-400 @enderror" />
+                    </div>
+                    @error('publishing_date')
+                    <div class="text-sm text-red-400">{{ $message }}</div>
+                    @enderror
                     <div>
-                        <label for="title" class="block text-sm font-medium text-gray-700"> Genre </label>
-                        <select id="genre_id" name="genre_id" class="form-multiselect block w-full mt-1 @error('genre_id') border-red-400 @enderror" multiple="">
+                        <label for="genre" class="block text-sm font-medium text-gray-700"> Genre </label>
+                        <select id="genre_id" name="genre_id[]" class="form-multiselect block w-full mt-1 @error('genre_id') border-red-400 @enderror" multiple="multiple">
                             @foreach($genre_id as $genre)
                                 <option value="{{ $genre->id }}">{{$genre->name}}</option>
                             @endforeach
@@ -52,8 +61,8 @@
                         @enderror
                     </div>
                     <div>
-                        <label for="title" class="block text-sm font-medium text-gray-700"> Author </label>
-                        <select id="author_id" name="author_id" class="form-multiselect block w-full mt-1 @error('author_id') border-red-400 @enderror" multiple="">
+                        <label for="author" class="block text-sm font-medium text-gray-700"> Author </label>
+                        <select id="author_id" name="author_id[]" class="form-multiselect block w-full mt-1 @error('author_id') border-red-400 @enderror" multiple="multiple">
                             @foreach($author_id as $author)
                                 <option value="{{ $author->id }}">{{$author->name}}</option>
                             @endforeach
@@ -62,7 +71,7 @@
                         <div class="text-sm text-red-400">{{ $message }}</div>
                         @enderror
                     </div>
-                    <label for="title" class="block text-sm font-medium text-gray-700"> Front cover </label>
+                    <label for="image" class="block text-sm font-medium text-gray-700"> Front cover </label>
                     <div class="mt-1">
                         <input type="file" id="image" name="image"
                                class="block w-full transition duration-150 ease-in-out appearance-none bg-white border border-gray-400 rounded-md py-2 px-3 text-base leading-normal transition duration-150 ease-in-out sm:text-sm sm:leading-5 @error('image') border-red-400 @enderror"/>
@@ -71,7 +80,7 @@
                     <div class="text-sm text-red-400">{{ $message }}</div>
                     @enderror
                     <div>
-                        <label for="title" class="block text-sm font-medium text-gray-700"> Summary </label>
+                        <label for="summary" class="block text-sm font-medium text-gray-700"> Summary </label>
                         <textarea name="summary" id="summary" cols="4" rows="4" class="@error('summary') border-red-400 @enderror"></textarea>
                     </div>
                     @error('summary')

@@ -10,7 +10,9 @@ class Book extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['title', 'isbn', 'pages', 'image', 'summary','genre_id','author_id'];
+    protected $fillable = ['title', 'isbn', 'pages', 'image', 'summary','publishing_date'];
+    public $timestamps = false;
+    protected $dates = ['publishing_date'];
 
     public function authors(): BelongsToMany
     {

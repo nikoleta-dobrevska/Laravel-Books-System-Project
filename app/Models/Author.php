@@ -12,6 +12,7 @@ class Author extends Model
     use HasFactory;
 
     protected $fillable = ['name', 'image'];
+    public $timestamps = false;
 
     public function books(): BelongsToMany
     {

@@ -37,14 +37,23 @@ class BookController extends Controller
     {
         $image = $request->file('image')->store('public/books');
 
+        $input = $request->all();
+        $genre_id = $input['genre_id'];
+        $input['genre_id'] = implode(',', $genre_id);
+
+        $inputTwo = $request->all();
+        $author_id = $inputTwo['author_id'];
+        $inputTwo['author_id'] = implode(',', $author_id);
+
         $book = Book::create([
             'title' => $request->title,
             'summary' => $request->summary,
             'image' => $image,
             'pages' => $request->pages,
             'isbn' => $request->isbn,
-            'genre_id' => $request->genre_id,
-            'author_id' => $request->author_id
+            'publishing_date' => $request->publishing_date,
+            $input,
+            $inputTwo
         ]);
 
         if ($request->has('genre_id')) {
@@ -67,13 +76,21 @@ class BookController extends Controller
 
     public function update(Request $request, Book $book)
     {
+        $input = $request->all();
+        $genre_id = $input['genre_id'];
+        $input['genre_id'] = implode(',', $genre_id);
+
+        $inputTwo = $request->all();
+        $author_id = $inputTwo['author_id'];
+        $inputTwo['author_id'] = implode(',', $author_id);
+
         $request->validate([
-            'title' => 'required',
-            'isbn' => 'required',
-            'pages' => 'required',
+            'title' => 'required|max:255',
+            'isbn' => 'required|max:255',
+            'pages' => 'required|integer|min:1|max:10000',
             'summary' => 'required',
-            'genre_id' => 'required',
-            'author_id' => 'required'
+            'publishing_date' => 'required|date',
+            'image' => 'mimes:jpeg,png,jpg|max:1024'
         ]);
 
         $image = $book->image;
@@ -89,8 +106,9 @@ class BookController extends Controller
             'pages' => $request->pages,
             'image' => $image,
             'summary' => $request->summary,
-            'genre_id' => $request->genre_id,
-            'author_id' => $request->author_id
+            'publishing_date' => $request->publishing_date,
+            $input,
+            $inputTwo
         ]);
 
         if ($request->has('genre_id')) {

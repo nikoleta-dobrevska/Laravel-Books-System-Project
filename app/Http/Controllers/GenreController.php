@@ -50,7 +50,7 @@ class GenreController extends Controller
     public function update(Request $request, Genre $genre)
     {
         $request->validate([
-            'name' => 'required'
+            'name' => 'required|regex:/^([^0-9]*)$/|max:255'
         ]);
 
         $genre->update([

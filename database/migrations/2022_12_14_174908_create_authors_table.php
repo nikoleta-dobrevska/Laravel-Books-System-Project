@@ -17,7 +17,6 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->string('image');
-            $table->foreignId('book_id')->nullable()->constrained()->references('id')->on('books')->onDelete('cascade');
         });
     }
 

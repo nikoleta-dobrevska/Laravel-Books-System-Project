@@ -19,9 +19,8 @@ return new class extends Migration
             $table->string('isbn');
             $table->integer('pages');
             $table->longText('summary');
+            $table->date('publishing_date');
             $table->string('image');
-            $table->foreignId('genre_id')->nullable()->constrained()->references('id')->on('genres')->onDelete('cascade');
-            $table->foreignId('author_id')->nullable()->constrained()->references('id')->on('authors')->onDelete('cascade');
         });
     }
 
