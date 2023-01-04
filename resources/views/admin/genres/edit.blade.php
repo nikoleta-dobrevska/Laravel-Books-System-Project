@@ -24,7 +24,7 @@
                 @error('name')
                 <div class="text-sm text-red-400">{{ $message }}</div>
                 @enderror
-                <button type="submit">Add</button>
+                <button type="submit">Update</button>
             </form>
         </div>
     </div>

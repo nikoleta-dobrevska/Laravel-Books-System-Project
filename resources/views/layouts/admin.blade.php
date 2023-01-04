@@ -74,6 +74,7 @@
                                 {{ __('Log Out') }}
                             </x-jet-responsive-nav-link>
                         </form>
+                        <a href="{{ route('admin.users.index') }}">User Management</a>
                     </div>
                 </div>
             </div>
