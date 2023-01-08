@@ -11,6 +11,6 @@ class AdminController extends Controller
 {
     public function index(): Factory|View|Application
     {
-        return view('admin.index');
+        return view('admin.dashboard.index');
     }
 }

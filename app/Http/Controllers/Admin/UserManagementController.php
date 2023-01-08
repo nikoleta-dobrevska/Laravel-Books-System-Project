@@ -21,25 +21,23 @@ class UserManagementController extends Controller
 
     public function update(Request $request, User $user)
     {
-        if($request->is_admin) {
+        if($user->is_admin && $request->is_admin) {
+            $user->update([
+                'is_admin'=>$request->is_admin==false
+            ]);
+        }elseif(!$user->is_admin && $request->is_admin){
             $user->update([
                 'is_admin'=>$request->is_admin==true
             ]);
         }
 
-        if($request->is_admin[1]) {
-            $user->update([
-                'is_admin'=>$request->is_admin==false
-            ]);
-        }
-
-        return to_route('admin.users.index')->with('success', 'The role has been updated successfully!');
+        return to_route('admin.users.index')->with('success', 'The role has been updated successfully');
     }
 
     public function destroy(User $user)
     {
         $user->delete();
 
-        return to_route('admin.users.index')->with('danger', 'The user has been deleted!');
+        return to_route('admin.users.index')->with('danger', 'The user has been deleted successfully');
     }
 }

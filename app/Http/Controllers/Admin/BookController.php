@@ -65,7 +65,7 @@ class BookController extends Controller
             $book->authors()->attach($request->author_id);
         }
 
-        return to_route('admin.books.index')->with('success', 'The book has been added successfully.');
+        return to_route('admin.books.index')->with('success', 'The book has been added successfully');
     }
 
     public function edit(Book $book)
@@ -85,16 +85,15 @@ class BookController extends Controller
         $author_id = $inputTwo['author_id'];
         $inputTwo['author_id'] = implode(',', $author_id);
 
-        $request->validate([
-            'title' => 'required|max:255',
-            'isbn' => 'required|max:255',
-            'pages' => 'required|integer|min:1|max:10000',
-            'summary' => 'required',
-            'publishing_date' => 'required|date',
-            'image' => 'mimes:jpeg,png,jpg|max:1024'
-        ]);
-
         $image = $book->image;
+
+        $request->validate([
+            'title' => ['required', 'max:255', 'unique:books,title,'.$book->id],
+            'isbn' => ['required', 'max:255', 'unique:books,isbn,'.$book->id],
+            'pages' => ['required', 'integer', 'min:1', 'max:10000'],
+            'summary' => ['required'],
+            'publishing_date'=>['required','date']
+        ]);
 
         if ($request->hasFile('image')) {
             Storage::delete($book->image);
@@ -120,7 +119,7 @@ class BookController extends Controller
             $book->authors()->sync($request->author_id);
         }
 
-        return to_route('admin.books.index')->with('success', 'The book has been updated successfully.');
+        return to_route('admin.books.index')->with('success', 'The book has been updated successfully');
     }
 
     public function destroy(Book $book)
@@ -130,7 +129,7 @@ class BookController extends Controller
         $book->authors()->detach();
         $book->delete();
 
-        return to_route('admin.books.index')->with('success', 'The book has been deleted successfully.');
+        return to_route('admin.books.index')->with('danger', 'The book has been deleted successfully');
     }
 }
 

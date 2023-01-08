@@ -2,7 +2,11 @@
 
 namespace Database\Seeders;
 
+use App\Models\Author;
+use App\Models\Book;
 use Illuminate\Database\Seeder;
+use App\Models\User;
+
 
 class DatabaseSeeder extends Seeder
 {
@@ -15,8 +19,8 @@ class DatabaseSeeder extends Seeder
     {
         // \App\Models\User::factory(10)->create();
         $this->call(AdminSeed::class);
-        \App\Models\Author::factory(1)->create();
-        \App\Models\Book::factory(1)->create();
+        Author::factory(1)->create();
+        Book::factory(1)->create();
         $this->call(GenreSeed::class);
     }
 }

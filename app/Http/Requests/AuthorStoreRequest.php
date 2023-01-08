@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class AuthorStoreRequest extends FormRequest
 {
@@ -24,7 +25,7 @@ class AuthorStoreRequest extends FormRequest
     public function rules()
     {
         return [
-            'name'=>['required','max:255','unique:authors,name','regex:/^([^0-9]*)$/'],
+            'name'=>['required','max:255','regex:/^([^0-9]*)$/',Rule::unique('authors','name')->ignore($this->author)],
             'image' => ['required','mimes:jpeg,png,jpg','max:1024']
         ];
     }

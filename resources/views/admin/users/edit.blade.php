@@ -1,51 +1,95 @@
-<x-admin-layout>
-    <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Dashboard') }}
-        </h2>
-    </x-slot>
+<x-layout bodyClass="g-sidenav-show  bg-gray-200">
 
-    <div class="py-12">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div class="flex justify-end m-2 p-2">
-                <a href="{{ route('admin.users.index') }}">Go back</a>
-            </div>
-        </div>
-        <div class="space-y-8 divide-y divide-gray-200 w-1/2 mt-10">
-            <form method="POST" action="{{ route('admin.users.update', $user->id) }}" enctype="multipart/form-data">
-                @csrf
-                @method('PUT')
-                <div class="sm:col-span-6">
-                    <th>
-                        <tb>
-                            <tr>
-                                <td>
-                                    {{ $user->name }}
-                                    {{ $user->email }}
-                                    <div class="checkbox">
-                                        <label>
-                                            <input type="checkbox" name="is_admin[0]" value="admin" {{ old('is_admin', $user->is_admin) ? 'checked' : '' }} onclick="uncheckAndCheck(event)"> Admin
-                                            <input type="checkbox" name="is_admin[1]" value="user"  {{ old('is_admin', $user->is_admin==false) ? 'checked' : '' }} onclick="uncheckAndCheck(event)"> User
-                                        </label>
-                                    </div>
-                                </td>
-                            </tr>
-                        </tb>
-                    </th>
+    <x-navbars.sidebar activePage="users"></x-navbars.sidebar>
+    <main class="main-content position-relative max-height-vh-100 h-100 border-radius-lg ">
+        <!-- Navbar -->
+        <x-navbars.navs.auth titlePage="User Management"></x-navbars.navs.auth>
+        <!-- End Navbar -->
+        <div class="container-fluid py-4">
+            <div class="row">
+                <div class="col-12">
+                    <a href="{{ route('admin.users.index') }}">Go back</a>
+                    <div class="card my-4">
+                        <div class="card-body px-0 pb-2">
+                            <div class="table-responsive p-0">
+                                <table class="table align-items-center mb-0">
+                                    <thead>
+                                    <tr>
+                                        <th
+                                            class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                            ID
+                                        </th>
+                                        <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7
+                                            ps-2">
+                                            NAME
+                                        </th>
+                                        <th
+                                            class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                            EMAIL
+                                        </th>
+                                        <th
+                                            class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                            ROLE
+                                        </th>
+                                        <th class="text-secondary opacity-7"></th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <form method="POST" action="{{ route('admin.users.update', $user->id) }}"
+                                          enctype="multipart/form-data">
+                                        @csrf
+                                        @method('PUT')
+                                        <tr>
+                                            <td>
+                                                <div class="d-flex px-2 py-1">
+                                                    <div class="d-flex flex-column justify-content-center">
+                                                        <p class="mb-0 text-sm">{{$user->id}}</p>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <div class="d-flex flex-column justify-content-center">
+                                                    <h6 class="mb-0 text-sm">{{$user->name}}</h6>
+                                                </div>
+                                            </td>
+                                            <td class="align-middle text-center text-sm">
+                                                <p class="text-xs text-secondary mb-0">{{$user->email}}
+                                                </p>
+                                            </td>
+                                            <td class="align-middle text-center">
+                                                <div class="checkbox">
+                                                    <label>
+                                                        <input type="checkbox" name="is_admin" value="admin"
+                                                               {{ old('is_admin', $user->is_admin) ? 'checked' : '' }} onclick="uncheckAndCheck(event)"> Admin
+                                                        <input type="checkbox" name="is_admin" value="user"
+                                                               {{ old('is_admin', $user->is_admin==false) ? 'checked' : '' }} onclick="uncheckAndCheck(event)"> User
+                                                    </label>
+                                                </div>
+                                            <td class="align-middle text-center">
+                                                <button class="text-secondary text-m font-weight-bold" type="submit">
+                                                    Update
+                                                </button>
+                                            </td>
+                                        </tr>
+                                    </form>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                @error('name')
-                <div class="text-sm text-red-400">{{ $message }}</div>
-                @enderror
-                <button type="submit">Update</button>
-            </form>
+            </div>
+            <x-footers.auth></x-footers.auth>
         </div>
-        <script>
-            function uncheckAndCheck(event) {
-                document.querySelectorAll( "input[type='checkbox'][name^='is_admin']" ).forEach( checkbox => {
-                    checkbox.checked = false;
-                });
-                event.target.checked = true;
-            }
-        </script>
-    </div>
-</x-admin-layout>
+    </main>
+    <script>
+        function uncheckAndCheck(event) {
+            document.querySelectorAll( "input[type='checkbox'][name^='is_admin']" ).forEach( checkbox => {
+                checkbox.checked = false;
+            });
+            event.target.checked = true;
+        }
+    </script>
+    <x-plugins></x-plugins>
+</x-layout>
+

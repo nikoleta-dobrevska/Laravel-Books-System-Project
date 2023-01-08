@@ -1,40 +1,71 @@
-<x-admin-layout>
-    <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Dashboard') }}
-        </h2>
-    </x-slot>
+<x-layout bodyClass="g-sidenav-show  bg-gray-200">
 
-    <div class="py-12">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div class="flex justify-end m-2 p-2">
-                <a href="{{ route('admin.authors.index') }}">Go back</a>
-            </div>
-        </div>
-        <div class="space-y-8 divide-y divide-gray-200 w-1/2 mt-10">
-            <form method="POST" action="{{ route('admin.authors.update', $author->id) }}" enctype="multipart/form-data">
-                @csrf
-                @method('PUT')
-                <div class="sm:col-span-6">
-                    <label for="name" class="block text-sm font-medium text-gray-700"> Name </label>
-                    <div class="mt-1">
-                        <img src="{{ Storage::url($author->image) }}"/>
-                        <input type="text" id="name" name="name" value="{{$author->name}}" class="block w-full transition duration-150 ease-in-out appearance-none bg-white border border-gray-400 rounded-md py-2 px-3 text-base leading-normal transition duration-150 ease-in-out sm:text-sm sm:leading-5 @error('name') border-red-400 @enderror" />
+    <x-navbars.sidebar activePage="authors"></x-navbars.sidebar>
+    <main class="main-content position-relative max-height-vh-100 h-100 border-radius-lg ">
+        <!-- Navbar -->
+        <x-navbars.navs.auth titlePage="Edit Author"></x-navbars.navs.auth>
+        <!-- End Navbar -->
+        <div class="container-fluid py-4">
+            <div class="row">
+                <div class="col-12">
+                    <a href="{{ route('admin.authors.index') }}">Go back</a>
+                    <div class="card my-4">
+                        <div class="card-body px-0 pb-2">
+                            <div class="table-responsive p-0">
+                                <table class="table align-items-center mb-0">
+                                    <thead>
+                                    <tr>
+                                        <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7
+                                            ps-2">
+                                            NAME
+                                        </th>
+                                        <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7
+                                            ps-2">
+                                            IMAGE
+                                        </th>
+                                        <th></th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <form method="POST" action="{{ route('admin.authors.update', $author->id) }}" enctype="multipart/form-data">
+                                        @csrf
+                                        @method('PUT')
+                                        @if ($errors->any())
+                                            <div class="alert alert-danger">
+                                                <ul>
+                                                    @foreach ($errors->all() as $error)
+                                                        <li>{{ $error }}</li>
+                                                    @endforeach
+                                                </ul>
+                                            </div>
+                                        @endif
+                                        <tr>
+                                            <td>
+                                                <div class="d-flex flex-column justify-content-center">
+                                                    <input type="text" id="name" name="name" value="{{$author->name}}" style="border-radius: 5px; border: 1px solid lightgray;" class="mb-0 text-m" />
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <div class="d-flex flex-column justify-content-center">
+                                                    <img style="width:25%" src="{{ Storage::url($author->image) }}"/>
+                                                    <input type="file" id="image" name="image" value="{{$author->image}}" class="block w-full transition duration-150 ease-in-out appearance-none bg-white border border-gray-400 rounded-md py-2 px-3 text-base leading-normal transition duration-150 ease-in-out sm:text-sm sm:leading-5" />
+                                                </div>
+                                            </td>
+                                            <td class="align-middle text-center">
+                                                <button class="text-secondary text-m font-weight-bold" type="submit">Update</button>
+                                            </td>
+                                        </tr>
+                                    </form>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
                     </div>
-                    @error('name')
-                    <div class="text-sm text-red-400">{{ $message }}</div>
-                    @enderror
-                    <label for="image" class="block text-sm font-medium text-gray-700"> Image of author </label>
-                    <div class="mt-1">
-                        <input type="file" id="image" name="image" value="{{$author->image}}" class="block w-full transition duration-150 ease-in-out appearance-none bg-white border border-gray-400 rounded-md py-2 px-3 text-base leading-normal transition duration-150 ease-in-out sm:text-sm sm:leading-5 @error('image') border-red-400 @enderror" />
-                    </div>
-                    @error('image')
-                    <div class="text-sm text-red-400">{{ $message }}</div>
-                    @enderror
                 </div>
-                <button type="submit">Update</button>
-            </form>
+            </div>
+            <x-footers.auth></x-footers.auth>
         </div>
-    </div>
-</x-admin-layout>
+    </main>
+    <x-plugins></x-plugins>
+</x-layout>
 

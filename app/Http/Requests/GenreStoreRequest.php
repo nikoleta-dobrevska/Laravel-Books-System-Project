@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class GenreStoreRequest extends FormRequest
 {
@@ -25,7 +26,7 @@ class GenreStoreRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => ['required','max:255','unique:genres,name','regex:/^([^0-9]*)$/']
+            'name' => ['required','max:255',Rule::unique('genres','name')->ignore($this->genre),'regex:/^([^0-9]*)$/']
         ];
     }
 }

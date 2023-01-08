@@ -10,6 +10,7 @@ use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Validation\Rule;
 
 class AuthorController extends Controller
 {
@@ -22,11 +23,6 @@ class AuthorController extends Controller
     public function __invoke()
     {
         // ...
-    }
-
-    public function show($id)
-    {
-        //
     }
 
     public function create()
@@ -43,7 +39,7 @@ class AuthorController extends Controller
             'image' => $image
         ]);
 
-        return to_route('admin.authors.index')->with('success','The author has been added successfully!');
+        return to_route('admin.authors.index')->with('success', 'The author has been added successfully');
     }
 
     public function edit(Author $author)
@@ -54,14 +50,12 @@ class AuthorController extends Controller
     public function update(Request $request, Author $author)
     {
         $request->validate([
-            'name' => 'required|regex:/^([^0-9]*)$/|max:255',
-            'image'=>'mimes:jpeg,png,jpg|max:1024'
+            'name' => 'required|max:255|regex:/^([^0-9]*)$/|unique:authors,name,'.$author->id,
         ]);
 
         $image = $author->image;
 
-        if($request->hasFile('image'))
-        {
+        if ($request->hasFile('image')) {
             Storage::delete($author->image);
             $image = $request->file('image')->store('public/authors');
         }
@@ -71,14 +65,15 @@ class AuthorController extends Controller
             'image' => $image
         ]);
 
-        return to_route('admin.authors.index')->with('success','The author has been updated successfully!');
+        return to_route('admin.authors.index')->with('success', 'The author has been updated successfully');
     }
 
     public function destroy(Author $author)
     {
         Storage::delete($author->image);
+        $author->books()->detach();
         $author->delete();
 
-        return to_route('admin.authors.index')->with('success','The author has been deleted successfully!');
+        return to_route('admin.authors.index')->with('danger', 'The author has been deleted successfully');
     }
 }

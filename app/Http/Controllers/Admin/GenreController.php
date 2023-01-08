@@ -23,12 +23,6 @@ class GenreController extends Controller
         // ...
     }
 
-    public function show($id)
-    {
-        //
-    }
-
-
     public function create()
     {
         return view('admin.genres.create');
@@ -40,7 +34,7 @@ class GenreController extends Controller
             'name' => $request->name
         ]);
 
-        return to_route('admin.genres.index')->with('success','The genre has been added successfully!');
+        return to_route('admin.genres.index')->with('success', 'The genre has been added successfully');
     }
 
     public function edit(Genre $genre)
@@ -48,23 +42,20 @@ class GenreController extends Controller
         return view('admin.genres.edit', compact('genre'));
     }
 
-    public function update(Request $request, Genre $genre)
+    public function update(GenreStoreRequest $request, Genre $genre)
     {
-        $request->validate([
-            'name' => 'required|regex:/^([^0-9]*)$/|max:255'
-        ]);
-
         $genre->update([
             'name' => $request->name
         ]);
 
-        return to_route('admin.genres.index')->with('success','The genre has been updated successfully!');
+        return to_route('admin.genres.index')->with('success', 'The genre has been updated successfully');
     }
 
     public function destroy(Genre $genre)
     {
+        $genre->books()->detach();
         $genre->delete();
 
-        return to_route('admin.genres.index')->with('success','The genre has been deleted successfully!');
+        return to_route('admin.genres.index')->with('danger', 'The genre has been deleted successfully');
     }
 }
